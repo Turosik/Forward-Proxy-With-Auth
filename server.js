@@ -40,12 +40,13 @@ server.on('connection', (clientToProxySocket) => {
       clientToProxySocket.pipe(proxyToServerSocket);
       proxyToServerSocket.pipe(clientToProxySocket);
 
-      proxyToServerSocket.on('error', (err) => {
-        console.log('PROXY TO SERVER ERROR');
-        console.log(err);
-      });
-      
     });
+
+    proxyToServerSocket.on('error', (err) => {
+      console.log('PROXY TO SERVER ERROR');
+      console.log(err);
+    });
+
     clientToProxySocket.on('error', err => {
       console.log('CLIENT TO PROXY ERROR');
       console.log(err);
