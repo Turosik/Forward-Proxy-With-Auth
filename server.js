@@ -45,6 +45,8 @@ server.on('connection', (clientToProxySocket) => {
     proxyToServerSocket.on('error', (err) => {
       console.log('PROXY TO SERVER ERROR');
       console.log(err);
+      clientToProxySocket.write('HTTP/1.1 500 Internal Server Error\r\n\r\n', () => {clientToProxySocket.destroy()});
+      proxyToServerSocket.destroy();
     });
 
     clientToProxySocket.on('error', err => {
